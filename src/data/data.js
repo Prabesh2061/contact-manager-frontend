@@ -1,5 +1,7 @@
+const apiUrl = process.env.REACT_APP_API_URL || 'https://localhost:4004';
+
 const userLogin = async (email, password) => {
-  const response = await fetch('http://localhost:4004/api/users/login', {
+  const response = await fetch(`${apiUrl}/api/users/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -10,7 +12,7 @@ const userLogin = async (email, password) => {
 }
 
 const createUser = async (username, email, password) => {
-  const response = await fetch('http://localhost:4004/api/users/register', {
+  const response = await fetch(`${apiUrl}/api/users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
