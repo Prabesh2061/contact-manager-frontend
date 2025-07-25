@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+const apiUrl = import.meta.env.VITE_API_BASE_URL
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -13,7 +14,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    fetch("http://localhost:4004/api/users/current", {
+    fetch(`${apiUrl}/api/users/current`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -23,7 +24,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    fetch("http://localhost:4004/api/contacts", {
+    fetch(`${apiUrl}/api/contacts`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -38,8 +39,8 @@ export default function Dashboard() {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
     const url = editId
-      ? `http://localhost:4004/api/contacts/${editId}`
-      : "http://localhost:4004/api/contacts";
+      ? `${apiUrl}/contacts/${editId}`
+      : `${apiUrl}/api/contacts`;
     const method = editId ? "PUT" : "POST";
     const res = await fetch(url, {
       method,
@@ -62,7 +63,7 @@ export default function Dashboard() {
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem("accessToken");
-    const res = await fetch(`http://localhost:4004/api/contacts/${id}`, {
+    const res = await fetch(`${apiUrl}/api/contacts/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     });
