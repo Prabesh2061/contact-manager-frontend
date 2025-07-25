@@ -39,7 +39,7 @@ export default function Dashboard() {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
     const url = editId
-      ? `${apiUrl}/contacts/${editId}`
+      ? `${apiUrl}/api/contacts/${editId}`
       : `${apiUrl}/api/contacts`;
     const method = editId ? "PUT" : "POST";
     const res = await fetch(url, {
