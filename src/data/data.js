@@ -1,4 +1,4 @@
-const apiUrl = process.env.REACT_APP_API_URL || 'https://localhost:4004';
+import.meta.env.VITE_API_BASE_URL
 
 const userLogin = async (email, password) => {
   const response = await fetch(`${apiUrl}/api/users/login`, {
