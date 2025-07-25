@@ -1,4 +1,4 @@
-const apiUrl = import.meta.env.VITE_API_BASE_URL
+const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4004';
 
 const userLogin = async (email, password) => {
   const response = await fetch(`${apiUrl}/api/users/login`, {

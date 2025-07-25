@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-const apiUrl = import.meta.env.VITE_API_BASE_URL
+const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4004';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -157,26 +157,25 @@ export default function Dashboard() {
                 required
               />
             </div>
-          </form>
-          <div className="flex gap-2 mt-4 justify-end">
-            <button
-              className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 px-6 rounded-lg hover:from-pink-500 hover:to-blue-500 transition"
-              type="submit"
-              form="form"
-              style={{ minWidth: "100px" }}
-            >
-              {editId ? "Update" : "Add"}
-            </button>
-            {editId && (
+            <div className="flex gap-2 mt-4 justify-end md:col-span-3">
               <button
-                type="button"
-                className="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition"
-                onClick={handleCancelEdit}
+                className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 px-6 rounded-lg hover:from-pink-500 hover:to-blue-500 transition"
+                type="submit"
+                style={{ minWidth: "100px" }}
               >
-                Cancel
+                {editId ? "Update" : "Add"}
               </button>
-            )}
-          </div>
+              {editId && (
+                <button
+                  type="button"
+                  className="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition"
+                  onClick={handleCancelEdit}
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          </form>
         </div>
 
         <div className="mb-4 flex justify-end">
@@ -235,8 +234,6 @@ export default function Dashboard() {
                   </tbody>
                 </table>
               </div>
-
-              
 
               <div className="md:hidden flex flex-col gap-4">
                 {filteredContacts.map(contact => (
