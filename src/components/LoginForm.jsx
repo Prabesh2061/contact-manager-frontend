@@ -17,11 +17,7 @@ export default function LoginForm({ onSwitchToSignup }) {
       setLoading(false);
       if (res.accessToken) {
         localStorage.setItem("accessToken", res.accessToken);
-        setMessage("Login successful!");
-        setTimeout(() => {
-          setMessage("");
-          navigate("/dashboard");
-        }, 1000);
+        navigate("/dashboard");
       } else {
         setMessage(res.message || "Login failed. Please check your credentials.");
         setTimeout(() => setMessage(""), 3000);

@@ -106,7 +106,7 @@ export default function Dashboard() {
             
           </div>
           <button
-            className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-6 rounded-lg transition"
+            className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-6 rounded-lg transition cursor-pointer"
             onClick={handleLogout}
           >
             Logout
@@ -159,7 +159,7 @@ export default function Dashboard() {
             </div>
             <div className="flex gap-2 mt-4 justify-end md:col-span-3">
               <button
-                className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 px-6 rounded-lg hover:from-pink-500 hover:to-blue-500 transition"
+                className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 px-6 rounded-lg hover:from-pink-500 hover:to-blue-500 transition cursor-pointer"
                 type="submit"
                 style={{ minWidth: "100px" }}
               >
@@ -168,7 +168,7 @@ export default function Dashboard() {
               {editId && (
                 <button
                   type="button"
-                  className="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition"
+                  className="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition cursor-pointer"
                   onClick={handleCancelEdit}
                 >
                   Cancel
@@ -217,13 +217,13 @@ export default function Dashboard() {
                         <td className="py-2 px-4">{contact.phone}</td>
                         <td className="py-2 px-4 text-center">
                           <button
-                            className="text-blue-500 hover:underline mr-4"
+                            className="text-blue-500 hover:underline mr-4 cursor-pointer"
                             onClick={() => handleEdit(contact)}
                           >
                             Edit
                           </button>
                           <button
-                            className="text-red-500 hover:underline"
+                            className="text-red-500 hover:underline cursor-pointer"
                             onClick={() => handleDelete(contact._id)}
                           >
                             Delete
