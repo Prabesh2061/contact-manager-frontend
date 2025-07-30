@@ -7,6 +7,7 @@ export default function SignUpForm({ onSwitchToLogin }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +18,10 @@ export default function SignUpForm({ onSwitchToLogin }) {
       return;
     }
 
+    setLoading(true);
     try {
       const res = await data.createUser(username, email, password);
+      setLoading(false);
       if (res._id && res.email) {
         setMessage("Registration successful! Redirecting to login...");
         setTimeout(() => {
@@ -33,6 +36,7 @@ export default function SignUpForm({ onSwitchToLogin }) {
         setTimeout(() => setMessage(""), 3000);
       }
     } catch (err) {
+      setLoading(false);
       setMessage(err.message || "Registration failed. Please try again.");
       setTimeout(() => setMessage(""), 3000);
     }
@@ -83,16 +87,24 @@ export default function SignUpForm({ onSwitchToLogin }) {
             <div className="text-red-500 text-center text-sm">{message}</div>
           )}
           <button
-            className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 rounded-lg mt-2 hover:from-pink-500 hover:to-blue-500 transition"
+            className="bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 rounded-lg mt-2 hover:from-pink-500 hover:to-blue-500 transition cursor-pointer"
             type="submit"
+            disabled={loading}
           >
-            Sign Up
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div className="w-6 h-6 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+                <span className="ml-2">Saving...</span>
+              </div>
+            ) : (
+              "Sign Up"
+            )}
           </button>
           <p className="text-gray-700 mt-4 text-center">
             Already have an account?{" "}
             <button
               type="button"
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:underline cursor-pointer"
               onClick={onSwitchToLogin}
             >
               Login

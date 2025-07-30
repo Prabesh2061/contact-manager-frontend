@@ -6,12 +6,15 @@ export default function LoginForm({ onSwitchToSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await data.userLogin(email, password);
+      setLoading(false);
       if (res.accessToken) {
         localStorage.setItem("accessToken", res.accessToken);
         setMessage("Login successful!");
@@ -24,6 +27,7 @@ export default function LoginForm({ onSwitchToSignup }) {
         setTimeout(() => setMessage(""), 3000);
       }
     } catch (err) {
+      setLoading(false);
       setMessage("Login failed. Please try again.");
       setTimeout(() => setMessage(""), 3000);
     }
@@ -63,16 +67,24 @@ export default function LoginForm({ onSwitchToSignup }) {
             <div className="text-red-500 text-center text-sm">{message}</div>
           )}
           <button
-            className="bg-gradient-to-r from-blue-400 to-pink-400 text-white font-bold py-2 rounded-lg mt-2 hover:from-blue-500 hover:to-pink-500 transition"
+            className="bg-gradient-to-r from-blue-400 to-pink-400 text-white font-bold py-2 rounded-lg mt-2 hover:from-blue-500 hover:to-pink-500 transition cursor-pointer"
             type="submit"
+            disabled={loading}
           >
-            Login
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div className="w-6 h-6 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+                <span className="ml-2">Logging in...</span>
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
           <p className="text-gray-700 mt-4 text-center">
             Don't have an account?{" "}
             <button
               type="button"
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:underline cursor-pointer"
               onClick={onSwitchToSignup}
             >
               Signup
